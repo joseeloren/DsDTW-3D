@@ -1,0 +1,38 @@
+{
+  "dataset": "3DAirSig",
+  "signers": 15,
+  "signatures": 600,
+  "development_signers": 12,
+  "evaluation_signers": 3,
+  "seed": 111,
+  "epochs": 20,
+  "steps": 240,
+  "points": 128,
+  "features": 9,
+  "network_device": "cuda",
+  "softdtw": "cpu",
+  "tests_passed": 9,
+  "raw_sources_unchanged": true,
+  "cross_split_duplicate_sha256": 0,
+  "model_sha256": "6cd77048e05ce631c1d5adb87a4c270f46e9a22ea2bca97280a7b4ebd8b97c77",
+  "evaluation": [
+    {
+      "references": 1,
+      "skilled_eer_percent": 13.33333333333333,
+      "random_eer_percent": 0.0,
+      "genuine_trials": 30,
+      "skilled_trials": 75,
+      "random_trials": 60
+    },
+    {
+      "references": 4,
+      "skilled_eer_percent": 0.0,
+      "random_eer_percent": 0.0,
+      "genuine_trials": 30,
+      "skilled_trials": 75,
+      "random_trials": 60
+    }
+  ],
+  "wheel_build_passed": true,
+  "installed_wheel_scores_identical": true
+}

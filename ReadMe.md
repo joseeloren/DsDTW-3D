@@ -1,3 +1,28 @@
+# DsDTW-3D: XYZ in-air signature baseline
+
+First supported dataset: **3DAirSig** (15 signers, 600 trajectories).
+
+```bash
+python -m pip install -e .
+python -m dsdtw3d run --raw-data /path/to/3DAirSig-Dataset --output runs/pilot --device cuda --softdtw cpu
+```
+
+See [the 3D guide](docs/3dairsig.md) for data format, signer-disjoint split,
+features, protocol, CPU/GPU choices and separate prepare/train/evaluate commands.
+Raw biometric data and generated checkpoints are not included.
+
+Validated on real 3DAirSig data: 20 epochs, 12 development signers and 3 held-out
+signers; nine tests pass. Skilled-forgery EER is 13.33% with one reference and
+0% with four; random-forgery EER is 0% in both cases. These are small-pilot
+results, not a published-benchmark claim. See [validation](validation/3dairsig-pilot.json).
+
+This repository preserves the history of [KAKAFEI123/DsDTW](https://github.com/KAKAFEI123/DsDTW).
+GitHub returned the owner's existing fork when a second fork was requested,
+so this is a separate history-preserving derivative. The original upstream
+README, citation and academic-use terms follow unchanged below.
+
+---
+
 ## The DsDTW method [1] for dynamic signature verification.
 
 This repository implements a soft-DTW-based deep model for learning online signature representations. The soft-DTW was cited from Cuturi et al.'s work [3]. The fast CUDA implementation of soft-DTW for pytorch refers to Maghoumi et al.'s work [5]. The model structure is based on the recurrent adaptation network in our previous work [2]. To use this repository, you should first download the DeepSignDB database [4]. If you find this repository useful, please cite our papers [1,2]. 

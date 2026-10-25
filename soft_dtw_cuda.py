@@ -30,7 +30,7 @@ from numba import cuda
 import math
 
 # ----------------------------------------------------------------------------------------------------------------------
-@cuda.jit
+@cuda.jit(max_registers=64)
 def compute_softdtw_cuda(D, gamma, bandwidth, max_i, max_j, inv_max_i, inv_max_j, n_passes, R):
     """
     :param seq_len: The length of the sequence (both inputs are assumed to be of the same size)
@@ -76,7 +76,7 @@ def compute_softdtw_cuda(D, gamma, bandwidth, max_i, max_j, inv_max_i, inv_max_j
         cuda.syncthreads()
 
 # ----------------------------------------------------------------------------------------------------------------------
-@cuda.jit
+@cuda.jit(max_registers=64)
 def compute_softdtw_backward_cuda(D, R, inv_gamma, bandwidth, max_i, max_j, inv_max_i, inv_max_j, n_passes, E):
     k = cuda.blockIdx.x
     tid = cuda.threadIdx.x
@@ -145,13 +145,14 @@ class _SoftDTWCUDA(Function):
                                                    gamma.item(), bandwidth.item(), N, M, 1./(N-1), 1./(M-1), n_passes,
                                                    cuda.as_cuda_array(R))
         ctx.save_for_backward(D, R, gamma, bandwidth)
-        return R[:, -2, -2]
+        return R[:, -2, -2].clone()
 
     @staticmethod
     def backward(ctx, grad_output):
         dev = grad_output.device
         dtype = grad_output.dtype
         D, R, gamma, bandwidth = ctx.saved_tensors
+        R = R.clone()
 
         B = D.shape[0]
         N = D.shape[1]
@@ -261,13 +262,14 @@ class _SoftDTW(Function):
         b_ = bandwidth.item()
         R = torch.Tensor(compute_softdtw(D_, g_, b_)).to(dev).type(dtype)
         ctx.save_for_backward(D, R, gamma, bandwidth)
-        return R[:, -2, -2]
+        return R[:, -2, -2].clone()
 
     @staticmethod
     def backward(ctx, grad_output):
         dev = grad_output.device
         dtype = grad_output.dtype
         D, R, gamma, bandwidth = ctx.saved_tensors
+        R = R.clone()
         D_ = D.detach().cpu().numpy()
         R_ = R.detach().cpu().numpy()
         g_ = gamma.item()
