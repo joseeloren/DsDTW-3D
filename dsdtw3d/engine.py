@@ -123,7 +123,7 @@ def evaluate(data_dir, checkpoint, output, references=1, device="auto"):
                 target.append(float(np.mean([dtw_l1(embeddings[query], embeddings[ref]) for ref in refs])))
     output = Path(output); output.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(output / f"scores-ref{references}.npz", genuine=genuine, skilled=skilled, random=random_scores)
-    report = dict(dataset="3DAirSig", evaluation_users=len(all_users), references=references,
+    report = dict(dataset=manifest["dataset"], evaluation_users=len(all_users), references=references,
                   reference_policy="first k numerically ordered files from native Genuine/train",
                   probe_policy="all native Genuine/test; random uses all other held-out signers' Genuine/test",
                   distance="exact DTW L1 / (sequence lengths sum); mean across references",

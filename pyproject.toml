@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dsdtw-3d"
-version = "0.1.0"
+version = "0.2.0"
 description = "A reproducible DsDTW baseline for XYZ in-air signatures"
 requires-python = ">=3.9"
 dependencies = ["numpy>=1.26,<2.2", "numba>=0.59,<0.62", "torch>=2.2,<2.8"]

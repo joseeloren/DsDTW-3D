@@ -1,0 +1,151 @@
+{
+  "dataset": "DeepAirSig",
+  "date": "2026-10-26",
+  "seed": 111,
+  "trajectories": 1800,
+  "dev_users": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "eval_users": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "configuration": {
+    "seed": 111,
+    "epochs": 20,
+    "steps_per_epoch": 32,
+    "tasks": 4,
+    "genuine": 5,
+    "forged": 10,
+    "lr": 0.01,
+    "momentum": 0.9,
+    "lr_decay": 0.9,
+    "gamma": 5,
+    "bandwidth": 0.1,
+    "device": "cuda",
+    "softdtw": "cpu",
+    "feature_names": [
+      "x",
+      "y",
+      "z",
+      "vx",
+      "vy",
+      "vz",
+      "ax",
+      "ay",
+      "az"
+    ],
+    "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+    "points": 128,
+    "torch": "2.7.1+cu128"
+  },
+  "training": {
+    "complete": true,
+    "epochs": 20,
+    "steps": 640,
+    "batch_schedule_sha256": "f39bd5cd95a88686059e81f988ce443813182c966d7cb4fd2d60a347dd347216",
+    "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+    "seconds": 13.135531902313232,
+    "prepared_data_unchanged": true,
+    "raw_sources_unchanged": true
+  },
+  "evaluation": [
+    {
+      "dataset": "DeepAirSig",
+      "evaluation_users": 8,
+      "references": 1,
+      "reference_policy": "first k numerically ordered files from native Genuine/train",
+      "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+      "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+      "skilled": {
+        "eer_percent": 8.0,
+        "eer_threshold": 10.268099933862686,
+        "genuine_trials": 80,
+        "forgery_trials": 200
+      },
+      "random": {
+        "eer_percent": 0.8928571428571428,
+        "eer_threshold": 11.435264048299619,
+        "genuine_trials": 80,
+        "forgery_trials": 560
+      },
+      "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+      "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+      "raw_sources_unchanged": true
+    },
+    {
+      "dataset": "DeepAirSig",
+      "evaluation_users": 8,
+      "references": 4,
+      "reference_policy": "first k numerically ordered files from native Genuine/train",
+      "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+      "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+      "skilled": {
+        "eer_percent": 3.749999999999998,
+        "eer_threshold": 10.040894775884226,
+        "genuine_trials": 80,
+        "forgery_trials": 200
+      },
+      "random": {
+        "eer_percent": 0.5357142857142857,
+        "eer_threshold": 11.514261529647879,
+        "genuine_trials": 80,
+        "forgery_trials": 560
+      },
+      "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+      "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+      "raw_sources_unchanged": true
+    }
+  ],
+  "verification": {
+    "tests_passed": 11,
+    "wheel_version": "0.2.0",
+    "wheel_scores_identical": true,
+    "cross_split_duplicate_hashes": 0,
+    "trajectory_files": 1800,
+    "epochs_logged": 20
+  },
+  "original_data_verification": {
+    "files_checked": 1801,
+    "original_files_unchanged": true,
+    "changed": []
+  },
+  "protocol": "DsDTW-3D functional baseline; not an official benchmark reproduction"
+}

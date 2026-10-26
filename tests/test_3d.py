@@ -5,7 +5,7 @@ import tempfile
 import unittest
 import numpy as np
 from dsdtw3d.features import extract_xyz
-from dsdtw3d.data import prepare, load_prepared, verify_sources, read_xyz
+from dsdtw3d.data import prepare, load_prepared, verify_sources, read_xyz, find_root
 
 
 class FeatureTests(unittest.TestCase):
@@ -31,6 +31,33 @@ class FeatureTests(unittest.TestCase):
 
 
 class PreparationTests(unittest.TestCase):
+    def test_deepairsig_nested_layout_split_and_original_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            parent = Path(temp) / "download"
+            root = parent / "DeepAirSig_Dataset"
+            for user in range(1, 41):
+                for folder in (f"Genuine/subject_{user}/train", f"Genuine/subject_{user}/test", f"Forged/subject_{user}"):
+                    p = root / folder / "1.txt"
+                    p.parent.mkdir(parents=True)
+                    p.write_text(f"0,0,0\n1,{user},2\n2,3,4\n")
+            manifest = prepare(parent, Path(temp) / "prepared", dataset="deepairsig")
+            arrays, loaded = load_prepared(Path(temp) / "prepared")
+            self.assertEqual(manifest["dataset"], "DeepAirSig")
+            self.assertEqual(manifest["dev_users"], list(range(1, 33)))
+            self.assertEqual(manifest["eval_users"], list(range(33, 41)))
+            self.assertEqual(arrays["features"].shape, (120, 128, 9))
+            self.assertTrue(verify_sources(loaded))
+            self.assertEqual(find_root(parent), root.resolve())
+            with self.assertRaises(ValueError): find_root(parent, "3dairsig")
+
+    def test_deepairsig_rejects_unmatched_forgery_signer(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "raw"
+            (root / "Genuine/subject_1/train").mkdir(parents=True)
+            (root / "Forged/subject_2").mkdir(parents=True)
+            with self.assertRaisesRegex(ValueError, "signer IDs do not match"):
+                prepare(root, Path(temp) / "prepared")
+
     def test_disjoint_users_and_native_roles_and_hashes(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp) / "raw"; output = Path(temp) / "prepared"

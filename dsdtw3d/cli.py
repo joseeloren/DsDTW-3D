@@ -7,7 +7,7 @@ from .data import prepare
 def main():
     parser = argparse.ArgumentParser(description="DsDTW baseline for XYZ in-air signatures")
     sub = parser.add_subparsers(dest="command", required=True)
-    preparation = sub.add_parser("prepare", help="Read 3DAirSig and create a signer-disjoint prepared copy")
+    preparation = sub.add_parser("prepare", help="Prepare 3DAirSig or DeepAirSig with signer-disjoint partitions")
     preparation.add_argument("--raw-data", type=Path, required=True)
     preparation.add_argument("--output", type=Path, required=True)
     preparation.add_argument("--points", type=int, default=128)
@@ -23,6 +23,8 @@ def main():
     pipeline.add_argument("--raw-data", type=Path, required=True)
     pipeline.add_argument("--output", type=Path, required=True)
     pipeline.add_argument("--points", type=int, default=128)
+    for command in (preparation, pipeline):
+        command.add_argument("--dataset", choices=("auto", "3dairsig", "deepairsig"), default="auto")
     for command in (training, pipeline):
         command.add_argument("--seed", type=int, default=111)
         command.add_argument("--epochs", type=int, default=20)
@@ -32,7 +34,7 @@ def main():
         command.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     args = parser.parse_args()
     if args.command == "prepare":
-        manifest = prepare(args.raw_data, args.output, args.points)
+        manifest = prepare(args.raw_data, args.output, args.points, dataset=args.dataset)
         print(json.dumps({key: value for key, value in manifest.items() if key != "files"}, indent=2))
         return
     from .engine import train, evaluate
@@ -47,7 +49,7 @@ def main():
             (args.output / "status.json").write_text(json.dumps(status, indent=2), encoding="utf-8")
         save()
         try:
-            prepare(args.raw_data, args.output / "data", args.points)
+            prepare(args.raw_data, args.output / "data", args.points, dataset=args.dataset)
             status["phase"] = "training"; save()
             training_result = train(args.output / "data", args.output / "train", args.seed,
                                     args.epochs, args.device, args.softdtw, args.steps_per_epoch)

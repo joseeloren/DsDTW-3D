@@ -1,6 +1,7 @@
 # DsDTW-3D: XYZ in-air signature baseline
 
-First supported dataset: **3DAirSig** (15 signers, 600 trajectories).
+Supported datasets: **3DAirSig** (15 signers, 600 trajectories) and
+**DeepAirSig** (40 signers, 1,800 trajectories).
 
 ```bash
 python -m pip install -e .
@@ -10,6 +11,16 @@ python -m dsdtw3d run --raw-data /path/to/3DAirSig-Dataset --output runs/pilot -
 See [the 3D guide](docs/3dairsig.md) for data format, signer-disjoint split,
 features, protocol, CPU/GPU choices and separate prepare/train/evaluate commands.
 Raw biometric data and generated checkpoints are not included.
+
+For DeepAirSig use `--dataset deepairsig --raw-data /path/to/DeepAirSig_Dataset`.
+See [the DeepAirSig guide](docs/deepairsig.md) for its layout, 32/8 signer split
+and complete training/evaluation command. Both loaders preserve the raw files.
+
+DeepAirSig validation completed 20 epochs (640 steps), seed 111, with 32
+development and eight held-out signers. Skilled-forgery EER is 8.00% / 3.75%
+for 1 / 4 references; random-forgery EER is 0.8929% / 0.5357%. All 11 tests pass.
+See [the aggregate report](validation/deepairsig-pilot.json) and
+[validation details](validation/README.md). These are functional baseline results.
 
 Validated on real 3DAirSig data: 20 epochs, 12 development signers and 3 held-out
 signers; nine tests pass. Skilled-forgery EER is 13.33% with one reference and

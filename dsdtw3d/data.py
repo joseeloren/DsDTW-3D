@@ -1,4 +1,4 @@
-"""Read-only 3DAirSig preparation with signer-disjoint development/evaluation."""
+"""Read-only XYZ dataset preparation with signer-disjoint development/evaluation."""
 import hashlib
 import json
 import math
@@ -30,33 +30,54 @@ def read_xyz(path):
     return xyz
 
 
-def find_root(root):
+def identify(root, dataset="auto"):
+    layouts = []
+    if dataset in ("auto", "3dairsig") and list(root.glob("subject-*/Genuine/train")):
+        layouts.append("3DAirSig")
+    if dataset in ("auto", "deepairsig") and list(root.glob("Genuine/subject_*/train")) and (root / "Forged").is_dir():
+        layouts.append("DeepAirSig")
+    if len(layouts) > 1:
+        raise ValueError("Ambiguous dataset root: specify --dataset")
+    return layouts[0] if layouts else None
+
+
+def find_root(root, dataset="auto"):
+    if dataset not in ("auto", "3dairsig", "deepairsig"):
+        raise ValueError("Unknown dataset; choose auto, 3dairsig or deepairsig")
     root = Path(root).resolve()
-    if list(root.glob("subject-*/Genuine/train")):
+    if identify(root, dataset):
         return root
-    children = [p for p in root.iterdir() if p.is_dir() and list(p.glob("subject-*/Genuine/train"))]
+    children = [p for p in root.iterdir() if p.is_dir() and identify(p, dataset)]
     if len(children) != 1:
-        raise ValueError("Point --raw-data to the directory containing subject-* folders")
+        raise ValueError("Point --raw-data to one dataset root or its direct parent")
     return children[0]
 
 
-def prepare(root, output, samples=128, eval_fraction=0.2):
-    root = find_root(root)
+def prepare(root, output, samples=128, eval_fraction=0.2, dataset="auto"):
+    root = find_root(root, dataset)
+    name = identify(root, dataset)
     output = Path(output)
     if not 0 < eval_fraction < 1:
         raise ValueError("eval_fraction must be between zero and one")
-    subjects = sorted([p for p in root.glob("subject-*") if p.is_dir()], key=lambda p: int(p.name.split("-")[1]))
+    if name == "DeepAirSig":
+        genuine = {int(p.name.split("_")[1]): p for p in (root / "Genuine").glob("subject_*") if p.is_dir()}
+        forged = {int(p.name.split("_")[1]): p for p in (root / "Forged").glob("subject_*") if p.is_dir()}
+        if genuine.keys() != forged.keys():
+            raise ValueError("DeepAirSig genuine/forgery signer IDs do not match")
+        subjects = [(uid, genuine[uid] / "train", genuine[uid] / "test", forged[uid]) for uid in sorted(genuine)]
+    else:
+        paths = sorted([p for p in root.glob("subject-*") if p.is_dir()], key=lambda p: int(p.name.split("-")[1]))
+        subjects = [(int(p.name.split("-")[1]), p / "Genuine/train", p / "Genuine/test", p / "Forged") for p in paths]
     count_eval = max(2, math.ceil(len(subjects) * eval_fraction))
     if len(subjects) - count_eval < 4:
         raise ValueError("Need >= 4 development and >= 2 evaluation signers")
-    eval_users = {int(p.name.split("-")[1]) for p in subjects[-count_eval:]}
+    eval_users = {item[0] for item in subjects[-count_eval:]}
     features, user_ids, roles, splits, source_files = [], [], [], [], []
-    for subject in subjects:
-        uid = int(subject.name.split("-")[1])
-        for folder, role in [("Genuine/train", "reference"), ("Genuine/test", "probe"), ("Forged", "forgery")]:
-            files = sorted((subject / folder).glob("*.txt"), key=lambda p: int(p.stem))
+    for uid, reference_dir, probe_dir, forgery_dir in subjects:
+        for folder, role in [(reference_dir, "reference"), (probe_dir, "probe"), (forgery_dir, "forgery")]:
+            files = sorted(folder.glob("*.txt"), key=lambda p: int(p.stem))
             if not files:
-                raise ValueError(f"Missing samples in {subject / folder}")
+                raise ValueError(f"Missing samples in {folder}")
             for path in files:
                 before = sha256(path)
                 xyz = read_xyz(path)
@@ -69,9 +90,9 @@ def prepare(root, output, samples=128, eval_fraction=0.2):
     output.mkdir(parents=True, exist_ok=False)
     np.savez_compressed(output / "dataset.npz", features=np.stack(features),
                         users=np.asarray(user_ids, dtype=np.int64), roles=np.asarray(roles), splits=np.asarray(splits))
-    manifest = dict(dataset="3DAirSig", samples=len(features), points=samples, feature_names=FEATURE_NAMES,
+    manifest = dict(dataset=name, samples=len(features), points=samples, feature_names=FEATURE_NAMES,
                     dev_users=sorted(set(user_ids) - eval_users), eval_users=sorted(eval_users),
-                    split_policy="last 20% of numerically ordered signer IDs held out; native train=references, test=probes",
+                    split_policy=f"last ceil({eval_fraction:g} * signers), minimum two, held out; native train=references, test=probes",
                     raw_root=str(root), files=source_files, dataset_sha256=sha256(output / "dataset.npz"))
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
