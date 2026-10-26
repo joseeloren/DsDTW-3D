@@ -82,6 +82,39 @@ class PreparationTests(unittest.TestCase):
 
 @unittest.skipUnless(importlib.util.find_spec("torch") and importlib.util.find_spec("numba"), "training runtime required")
 class RuntimeTests(unittest.TestCase):
+    def test_local_separation_and_reference_change_can_affect_pooled_eer(self):
+        from dsdtw3d.diagnose import score
+        table = {13: dict(probe=np.array([[1., 2.], [1., 2.]]),
+                          forgery=np.array([[3., 4.], [7., 8.]])),
+                 14: dict(probe=np.array([[5., 6.], [3., 4.]]),
+                          forgery=np.array([[7., 8.], [9., 10.]]))}
+        self.assertEqual(score(table, [13])["eer_percent"], 0)
+        self.assertEqual(score(table, [14])["eer_percent"], 0)
+        self.assertEqual(score(table, [13, 14])["eer_percent"], 50)
+        self.assertEqual(score(table, [13, 14], [1, 1])["eer_percent"], 0)
+
+    def test_diagnostic_derivative_variants_preserve_xyz_and_source_npz(self):
+        from dsdtw3d.diagnose import derived_data
+        from dsdtw3d.data import sha256
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "source"; root.mkdir()
+            t = np.linspace(0, 1, 65)
+            f = extract_xyz(np.stack([t, np.sin(7 * t), t**2], axis=1))[None]
+            np.savez_compressed(root / "dataset.npz", features=f, users=np.array([1]),
+                                roles=np.array(["reference"]), splits=np.array(["dev"]))
+            before = sha256(root / "dataset.npz")
+            (root / "manifest.json").write_text(json.dumps(dict(dataset_sha256=before)))
+            for variant in ("smoothed_derivatives", "xyz_only"):
+                output = Path(temp) / variant
+                derived_data(root, output, variant)
+                a, manifest = load_prepared(output)
+                np.testing.assert_array_equal(a["features"][:, :, :3], f[:, :, :3])
+                self.assertTrue(np.isfinite(a["features"]).all())
+                self.assertEqual(manifest["parent_dataset_sha256"], before)
+                if variant == "xyz_only": self.assertTrue(np.all(a["features"][:, :, 3:] == 0))
+                else: self.assertFalse(np.array_equal(a["features"][:, :, 3:], f[:, :, 3:]))
+            self.assertEqual(sha256(root / "dataset.npz"), before)
+
     def test_five_seed_statistics_are_unpooled_and_use_sample_std(self):
         from dsdtw3d.benchmark import aggregate, SEEDS
         records = [dict(seed=seed, references=refs, skilled=dict(eer_percent=i + 1),

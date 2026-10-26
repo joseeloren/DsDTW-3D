@@ -105,3 +105,30 @@ See [five-seeds.json](five-seeds.json) for complete per-seed aggregates,
 thresholds, runtime/code hashes and verification records, and
 [the runner guide](../docs/five-seeds.md) to repeat the experiment. Private
 checkpoints, data and individual score arrays remain excluded from Git.
+
+## Diagnosing one-reference variation in 3DAirSig
+
+The [diagnosis](../docs/3dairsig-diagnosis.md) tests reference choice, user
+composition, 640-step training, smoothed derivatives and XYZ-only input.
+Fifteen additional models completed 20 epochs each; 30 evaluation conditions
+and all 300 epoch records were verified. The original feature extractor,
+training engine, models and reported five-seed results remain unchanged.
+
+The dominant observed mechanism is cross-user score alignment under a global
+threshold and an arbitrary first reference, amplified by only three evaluation
+users. Individual-user EER is zero for every seed, while pooled EER varies.
+The first-reference case is 8.80 ± 3.87%; averaging five predetermined single-
+reference trials yields 2.75 ± 0.94%. More training yields 6.40 ± 3.82%, so it
+does not remove the dispersion. Smoothing derivatives worsens it.
+
+All 2,400 baseline feature tensors regenerate bit for bit from the raw text;
+all 2,402 original TXT files including READMEs were checked unchanged. See the
+[aggregate report](3dairsig-diagnosis.json) for the reference combinations,
+user-subset results, interventions and integrity checks. Local EER and reference
+alternatives are exploratory diagnostics, not test-calibrated replacements
+for the original benchmark metric.
+
+All 14 tests pass. Original checkpoint hashes remain unchanged and paired
+feature interventions use identical sampled batches to the baseline.
+
+![3DAirSig diagnostic comparison](figures/3dairsig-diagnosis.png)

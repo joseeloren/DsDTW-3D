@@ -29,6 +29,11 @@ The completed ten-model experiment gives skilled EER mean ± sample SD of
 8.80 ± 3.87% / 0.53 ± 1.19% for 3DAirSig. One-reference 3DAirSig is more
 variable across seeds. See [all per-seed results](validation/README.md#five-fresh-seeds-on-both-datasets).
 
+[The one-reference diagnosis](docs/3dairsig-diagnosis.md) identifies a strong
+reference/global-threshold effect in 3DAirSig: all three users have zero local
+EER, yet their pooled scores overlap. Fifteen controlled training runs and
+reference/user-subset analyses are recorded without replacing baseline results.
+
 Validated on real 3DAirSig data: 20 epochs, 12 development signers and 3 held-out
 signers; nine tests pass. Skilled-forgery EER is 13.33% with one reference and
 0% with four; random-forgery EER is 0% in both cases. These are small-pilot
