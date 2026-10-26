@@ -22,6 +22,13 @@ for 1 / 4 references; random-forgery EER is 0.8929% / 0.5357%. All 11 tests pass
 See [the aggregate report](validation/deepairsig-pilot.json) and
 [validation details](validation/README.md). These are functional baseline results.
 
+To train seeds 111/222/333/444/555 on both datasets and compare mean EER and
+sample standard deviation, see [the five-seed runner](docs/five-seeds.md).
+The completed ten-model experiment gives skilled EER mean ± sample SD of
+7.85 ± 1.04% / 3.95 ± 0.93% for DeepAirSig (1 / 4 references), and
+8.80 ± 3.87% / 0.53 ± 1.19% for 3DAirSig. One-reference 3DAirSig is more
+variable across seeds. See [all per-seed results](validation/README.md#five-fresh-seeds-on-both-datasets).
+
 Validated on real 3DAirSig data: 20 epochs, 12 development signers and 3 held-out
 signers; nine tests pass. Skilled-forgery EER is 13.33% with one reference and
 0% with four; random-forgery EER is 0% in both cases. These are small-pilot

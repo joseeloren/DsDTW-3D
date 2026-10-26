@@ -49,3 +49,59 @@ The aggregate report, including thresholds, configuration and checksums, is
 [deepairsig-pilot.json](deepairsig-pilot.json). This is one seed on the explicit
 [DsDTW-3D protocol](../docs/deepairsig.md), not an official DeepAirSig benchmark
 reproduction. Checkpoints and individual scores remain private.
+
+## Five fresh seeds on both datasets
+
+On 26 October 2026, seeds 111, 222, 333, 444 and 555 were trained from scratch
+on **each** dataset. All ten models completed 20 epochs, followed by 20 total
+evaluation conditions. The network used CUDA and soft-DTW used CPU. Features,
+fixed signer partitions, references, model, optimizer and evaluation are the
+same as the pilots. DeepAirSig uses 640 optimizer steps per seed; 3DAirSig uses
+240 because its development set is smaller.
+
+EER (%) below is the mean of five separate per-model EERs ± **sample** standard
+deviation (`ddof=1`) in percentage points; model scores are not pooled.
+
+| Dataset | References | Skilled mean ± SD | Random mean ± SD | Skilled range |
+| --- | ---: | ---: | ---: | ---: |
+| DeepAirSig | 1 | 7.8500 ± 1.0398 | 1.0000 ± 0.2396 | 6.2500–8.7500 |
+| DeepAirSig | 4 | 3.9500 ± 0.9253 | 0.1071 ± 0.2396 | 3.0000–5.5000 |
+| 3DAirSig | 1 | 8.8000 ± 3.8701 | 0.0000 ± 0.0000 | 3.3333–13.3333 |
+| 3DAirSig | 4 | 0.5333 ± 1.1926 | 0.0000 ± 0.0000 | 0.0000–2.6667 |
+
+Per-seed EER (%):
+
+| Dataset | Seed | Skilled 1 ref | Skilled 4 refs | Random 1 ref | Random 4 refs |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| DeepAirSig | 111 | 8.0000 | 3.7500 | 0.8929 | 0.5357 |
+| DeepAirSig | 222 | 6.2500 | 3.7500 | 1.2500 | 0.0000 |
+| DeepAirSig | 333 | 8.7500 | 3.0000 | 1.2500 | 0.0000 |
+| DeepAirSig | 444 | 7.5000 | 3.7500 | 0.7143 | 0.0000 |
+| DeepAirSig | 555 | 8.7500 | 5.5000 | 0.8929 | 0.0000 |
+| 3DAirSig | 111 | 13.3333 | 0.0000 | 0.0000 | 0.0000 |
+| 3DAirSig | 222 | 6.6667 | 0.0000 | 0.0000 | 0.0000 |
+| 3DAirSig | 333 | 10.6667 | 2.6667 | 0.0000 | 0.0000 |
+| 3DAirSig | 444 | 3.3333 | 0.0000 | 0.0000 | 0.0000 |
+| 3DAirSig | 555 | 10.0000 | 0.0000 | 0.0000 | 0.0000 |
+
+DeepAirSig's skilled EER varies by roughly one percentage point across seeds.
+3DAirSig with one reference is appreciably less stable: SD 3.87 points and a
+ten-point range. Its pilot seed 111 is 4.53 points above the five-seed mean.
+With four references, 3DAirSig has four zero-EER seeds and one at 2.67%.
+Between-dataset mean differences are 0.95 points (one reference, 3DAirSig higher)
+and 3.42 points (four references, DeepAirSig higher). They do not establish
+statistical equivalence or superiority: signers, acquisition, training sizes
+and trial counts differ. The small 3DAirSig evaluation has only three signers.
+Seed stability here concerns one fixed split, not unseen populations.
+
+All 12 tests pass. All 200 epoch records, ten model hashes and 20 evaluations
+were checked; EERs were recomputed from the saved scores. Both new seed-111
+models reproduce every score from their respective earlier pilots exactly.
+All 2,400 trajectory hashes match the original I: source ledgers; re-reading
+the 2,402 original text files including READMEs confirms they remain unchanged.
+Prepared-data hashes also remain unchanged. Existing pickles were not used.
+
+See [five-seeds.json](five-seeds.json) for complete per-seed aggregates,
+thresholds, runtime/code hashes and verification records, and
+[the runner guide](../docs/five-seeds.md) to repeat the experiment. Private
+checkpoints, data and individual score arrays remain excluded from Git.

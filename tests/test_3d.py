@@ -82,6 +82,17 @@ class PreparationTests(unittest.TestCase):
 
 @unittest.skipUnless(importlib.util.find_spec("torch") and importlib.util.find_spec("numba"), "training runtime required")
 class RuntimeTests(unittest.TestCase):
+    def test_five_seed_statistics_are_unpooled_and_use_sample_std(self):
+        from dsdtw3d.benchmark import aggregate, SEEDS
+        records = [dict(seed=seed, references=refs, skilled=dict(eer_percent=i + 1),
+                        random=dict(eer_percent=0)) for refs in (1, 4) for i, seed in enumerate(SEEDS)]
+        rows = aggregate(list(reversed(records)))
+        self.assertEqual(rows[0]["mean_percent"], 3)
+        self.assertAlmostEqual(rows[0]["sample_std_pp"], np.sqrt(2.5))
+        self.assertEqual(rows[0]["eer_percent"], [1, 2, 3, 4, 5])
+        self.assertEqual(rows[1]["sample_std_pp"], 0)
+        with self.assertRaises(ValueError): aggregate(records[:-1])
+
     def test_training_checkpoint_reloads_for_evaluation(self):
         from dsdtw3d.engine import train, evaluate
         with tempfile.TemporaryDirectory() as temp:

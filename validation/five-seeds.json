@@ -1,0 +1,980 @@
+{
+  "seeds": [
+    111,
+    222,
+    333,
+    444,
+    555
+  ],
+  "epochs": 20,
+  "points": 128,
+  "softdtw": "cpu",
+  "statistics": "Arithmetic mean and sample standard deviation (ddof=1) of five per-seed EERs; pp=percentage points",
+  "runtime": {
+    "python": "3.9.23",
+    "torch": "2.7.1+cu128",
+    "numpy": "1.26.4",
+    "numba": "0.60.0",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+  },
+  "code_sha256": {
+    "metrics.py": "6fc77a2a8ee0a71dbc0ca5e3b7d825e7828bd3eb31c7f1d45046b7484f623d12",
+    "model.py": "903cbf098cc33ab6f81f4c73089b311b68e6292e9f467e978d43c82bc50aa412",
+    "data.py": "899ac7a2073a4bc1be1a06e40fac306067fb66d37eac92e5c15e2f443172317c",
+    "__main__.py": "96863fad19ea91611f5ad966fc4d4e6af09e55c4e1e1171d6d277d22e312e21c",
+    "__init__.py": "2550df2b218d3b729b962db6b7452d2c92591f59e969319018294d89af0e535d",
+    "features.py": "73aca728459bd69b522a4914402eaaf5b6777dbdc8c501f9502bd757a3bf52bc",
+    "benchmark.py": "e0fd6a30d5889365e895ae142b36a98bce51ea4e931b3a7cc077bc9e7e7d1605",
+    "engine.py": "a53e26d089c5178a131174644ab43d96af2ffb5c4bbec1c8ffc5f0665dda7048",
+    "cli.py": "6ced005b7e6842a1b466fb8f81f73e9c8b3ec2926b8b602a199f8c580587a230",
+    "soft_dtw_cuda.py": "136a948fed24c2099171a4b246685f4fd1b7c431434a1d91bcf2edce71b49457"
+  },
+  "datasets": {
+    "deepairsig": {
+      "dataset": "DeepAirSig",
+      "trajectories": 1800,
+      "dev_users": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "eval_users": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+      "steps_per_epoch": 32,
+      "cross_split_duplicate_hashes": 0,
+      "prepared_data_unchanged": true,
+      "raw_sources_unchanged": true,
+      "training": [
+        {
+          "seed": 111,
+          "complete": true,
+          "epochs": 20,
+          "steps": 640,
+          "batch_schedule_sha256": "f39bd5cd95a88686059e81f988ce443813182c966d7cb4fd2d60a347dd347216",
+          "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+          "seconds": 13.172752857208252,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "complete": true,
+          "epochs": 20,
+          "steps": 640,
+          "batch_schedule_sha256": "dee6094c171f4a4042079e658fac4f97b3503b8206685008c3566a5c9870ea2c",
+          "model_sha256": "c3f5252424811ea4ed7dc522fefd71bc3e8f1a61fa2f5b66ec773eb491c68136",
+          "seconds": 11.845144987106323,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "complete": true,
+          "epochs": 20,
+          "steps": 640,
+          "batch_schedule_sha256": "06df6cce728075fba0ed3719eefa26d3bc37237e93f0197309d74c65c18b6a0c",
+          "model_sha256": "7858904b2e48c65aa8f26059aee141548067c2ec0478ad29c705164b555ad798",
+          "seconds": 10.921823024749756,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "complete": true,
+          "epochs": 20,
+          "steps": 640,
+          "batch_schedule_sha256": "8e9090d6b9f633cf371b9357998bf770a842553a24cefbe84765d2535876f0f8",
+          "model_sha256": "6583d493d429a27776b67977e3fd10199f15febd05b76a51b21e025a9ab97b82",
+          "seconds": 10.85763955116272,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "complete": true,
+          "epochs": 20,
+          "steps": 640,
+          "batch_schedule_sha256": "d9f2e1a2055fd0feaf4529e6d6698c9e6fbc2f0e919d136d43da88cb4ac51f27",
+          "model_sha256": "7c9cfca0797c3f8d066485a4b607fd5159bea53c9f6051682c29fcebed7ea23a",
+          "seconds": 10.868951559066772,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        }
+      ],
+      "evaluation": [
+        {
+          "seed": 111,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 8.0,
+            "eer_threshold": 10.268099933862686,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.8928571428571428,
+            "eer_threshold": 11.435264048299619,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 111,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 3.749999999999998,
+            "eer_threshold": 10.040894775884226,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.5357142857142857,
+            "eer_threshold": 11.514261529647879,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "58a7c25f695d608c59d7a7e56dab1ac77b7815e606735fbef09d737e7b98c448",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 6.25,
+            "eer_threshold": 10.607241516932845,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 1.2499999999999956,
+            "eer_threshold": 11.895364701747894,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "c3f5252424811ea4ed7dc522fefd71bc3e8f1a61fa2f5b66ec773eb491c68136",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 3.749999999999998,
+            "eer_threshold": 9.929033786524087,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 11.33602633420378,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "c3f5252424811ea4ed7dc522fefd71bc3e8f1a61fa2f5b66ec773eb491c68136",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 8.750000000000002,
+            "eer_threshold": 10.005148937925696,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 1.25,
+            "eer_threshold": 11.52663442119956,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "7858904b2e48c65aa8f26059aee141548067c2ec0478ad29c705164b555ad798",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 3.0,
+            "eer_threshold": 9.610166922770441,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 10.195659883320332,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "7858904b2e48c65aa8f26059aee141548067c2ec0478ad29c705164b555ad798",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 7.5,
+            "eer_threshold": 10.20289645716548,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.7142857142857143,
+            "eer_threshold": 11.869610074375357,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "6583d493d429a27776b67977e3fd10199f15febd05b76a51b21e025a9ab97b82",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 3.749999999999998,
+            "eer_threshold": 9.693755449960008,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 11.446835377719253,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "6583d493d429a27776b67977e3fd10199f15febd05b76a51b21e025a9ab97b82",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 8.750000000000002,
+            "eer_threshold": 10.492638563737273,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.8928571428571428,
+            "eer_threshold": 12.206808913499117,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "7c9cfca0797c3f8d066485a4b607fd5159bea53c9f6051682c29fcebed7ea23a",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "dataset": "DeepAirSig",
+          "evaluation_users": 8,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 5.5,
+            "eer_threshold": 9.642970239557325,
+            "genuine_trials": 80,
+            "forgery_trials": 200
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 11.06903135869652,
+            "genuine_trials": 80,
+            "forgery_trials": 560
+          },
+          "model_sha256": "7c9cfca0797c3f8d066485a4b607fd5159bea53c9f6051682c29fcebed7ea23a",
+          "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+          "raw_sources_unchanged": true
+        }
+      ],
+      "statistics": [
+        {
+          "references": 1,
+          "attack": "skilled",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            8.0,
+            6.25,
+            8.750000000000002,
+            7.5,
+            8.750000000000002
+          ],
+          "mean_percent": 7.85,
+          "sample_std_pp": 1.039831717154272,
+          "population_std_pp": 0.9300537618869145,
+          "min_percent": 6.25,
+          "max_percent": 8.750000000000002
+        },
+        {
+          "references": 1,
+          "attack": "random",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            0.8928571428571428,
+            1.2499999999999956,
+            1.25,
+            0.7142857142857143,
+            0.8928571428571428
+          ],
+          "mean_percent": 0.9999999999999989,
+          "sample_std_pp": 0.2395787118749763,
+          "population_std_pp": 0.21428571428571327,
+          "min_percent": 0.7142857142857143,
+          "max_percent": 1.25
+        },
+        {
+          "references": 4,
+          "attack": "skilled",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            3.749999999999998,
+            3.749999999999998,
+            3.0,
+            3.749999999999998,
+            5.5
+          ],
+          "mean_percent": 3.9499999999999984,
+          "sample_std_pp": 0.9253377761660877,
+          "population_std_pp": 0.8276472678623428,
+          "min_percent": 3.0,
+          "max_percent": 5.5
+        },
+        {
+          "references": 4,
+          "attack": "random",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            0.5357142857142857,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean_percent": 0.10714285714285714,
+          "sample_std_pp": 0.23957871187497745,
+          "population_std_pp": 0.21428571428571427,
+          "min_percent": 0.0,
+          "max_percent": 0.5357142857142857
+        }
+      ],
+      "prior_seed111_scores_identical": true,
+      "original_files_verification": {
+        "files_checked": 1801,
+        "all_original_files_unchanged": true,
+        "changed_files": []
+      },
+      "shared_training_configuration": {
+        "epochs": 20,
+        "steps_per_epoch": 32,
+        "tasks": 4,
+        "genuine": 5,
+        "forged": 10,
+        "lr": 0.01,
+        "momentum": 0.9,
+        "lr_decay": 0.9,
+        "gamma": 5,
+        "bandwidth": 0.1,
+        "device": "cuda",
+        "softdtw": "cpu",
+        "feature_names": [
+          "x",
+          "y",
+          "z",
+          "vx",
+          "vy",
+          "vz",
+          "ax",
+          "ay",
+          "az"
+        ],
+        "dataset_sha256": "f6389dc104fdb7e423f55a008438facf14c6b90b96fe4dfabd77a5ffaaed3aaf",
+        "points": 128,
+        "torch": "2.7.1+cu128"
+      }
+    },
+    "3dairsig": {
+      "dataset": "3DAirSig",
+      "trajectories": 600,
+      "dev_users": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "eval_users": [
+        13,
+        14,
+        15
+      ],
+      "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+      "steps_per_epoch": 12,
+      "cross_split_duplicate_hashes": 0,
+      "prepared_data_unchanged": true,
+      "raw_sources_unchanged": true,
+      "training": [
+        {
+          "seed": 111,
+          "complete": true,
+          "epochs": 20,
+          "steps": 240,
+          "batch_schedule_sha256": "a056045dd96da86669b9b086edf8fc919027856697e90c7a1c45cb291f1ccb76",
+          "model_sha256": "6cd77048e05ce631c1d5adb87a4c270f46e9a22ea2bca97280a7b4ebd8b97c77",
+          "seconds": 4.0656914710998535,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "complete": true,
+          "epochs": 20,
+          "steps": 240,
+          "batch_schedule_sha256": "36f5d8685795e7529fa8fc2857bbc6efa3da6d9f6a6af899d25e1dd70a0c8845",
+          "model_sha256": "c858a7a57baf5e48663365d8efdae4baf7b5cf062959d61102c16933b3046003",
+          "seconds": 4.045703649520874,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "complete": true,
+          "epochs": 20,
+          "steps": 240,
+          "batch_schedule_sha256": "64351668b020040d987c4d7cb241ac79c1efdf8a51efcf67751abf6d58e206e4",
+          "model_sha256": "d0d796a8be8d209b8906d617c8fbf47d64609010e892a4e2fc3e4d9c26e62bb4",
+          "seconds": 4.037502765655518,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "complete": true,
+          "epochs": 20,
+          "steps": 240,
+          "batch_schedule_sha256": "1d91c1f52c853f357c485cc1b68ceb46761f07220ae2caa7aaccb9ece3b08348",
+          "model_sha256": "74ed9a2f14a1d0f6966802bcfc8cfa22ba0cd5373d1c1e706c9cc1c5bb5208b6",
+          "seconds": 4.0478925704956055,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "complete": true,
+          "epochs": 20,
+          "steps": 240,
+          "batch_schedule_sha256": "93419b58542ff28b5ec98c5c4ada1edb0aa50c05a54e501d3f2f4ab66a0b2fb7",
+          "model_sha256": "676116856c597ef14fd0d8259a4f64ab28c72f68b7421837006b13f97d954d2f",
+          "seconds": 4.043449878692627,
+          "prepared_data_unchanged": true,
+          "raw_sources_unchanged": true
+        }
+      ],
+      "evaluation": [
+        {
+          "seed": 111,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 13.33333333333333,
+            "eer_threshold": 9.732688654214144,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 10.761282937601209,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "6cd77048e05ce631c1d5adb87a4c270f46e9a22ea2bca97280a7b4ebd8b97c77",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 111,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 0.0,
+            "eer_threshold": 9.100242833606899,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 9.100242833606899,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "6cd77048e05ce631c1d5adb87a4c270f46e9a22ea2bca97280a7b4ebd8b97c77",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 6.666666666666665,
+            "eer_threshold": 9.273720122873783,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 9.878423392772675,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "c858a7a57baf5e48663365d8efdae4baf7b5cf062959d61102c16933b3046003",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 222,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 0.0,
+            "eer_threshold": 8.393156660720706,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 8.393156660720706,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "c858a7a57baf5e48663365d8efdae4baf7b5cf062959d61102c16933b3046003",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 10.666666666666668,
+            "eer_threshold": 8.70886880159378,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 10.029652781784534,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "d0d796a8be8d209b8906d617c8fbf47d64609010e892a4e2fc3e4d9c26e62bb4",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 333,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 2.666666666666667,
+            "eer_threshold": 8.291040912363679,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 8.398277612868696,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "d0d796a8be8d209b8906d617c8fbf47d64609010e892a4e2fc3e4d9c26e62bb4",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 3.3333333333333326,
+            "eer_threshold": 9.543995950371027,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 9.862057093530893,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "74ed9a2f14a1d0f6966802bcfc8cfa22ba0cd5373d1c1e706c9cc1c5bb5208b6",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 444,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 0.0,
+            "eer_threshold": 8.663487342186272,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 8.663487342186272,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "74ed9a2f14a1d0f6966802bcfc8cfa22ba0cd5373d1c1e706c9cc1c5bb5208b6",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 1,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 9.999999999999998,
+            "eer_threshold": 8.207096075639129,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 9.142756666988134,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "676116856c597ef14fd0d8259a4f64ab28c72f68b7421837006b13f97d954d2f",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        },
+        {
+          "seed": 555,
+          "dataset": "3DAirSig",
+          "evaluation_users": 3,
+          "references": 4,
+          "reference_policy": "first k numerically ordered files from native Genuine/train",
+          "probe_policy": "all native Genuine/test; random uses all other held-out signers' Genuine/test",
+          "distance": "exact DTW L1 / (sequence lengths sum); mean across references",
+          "skilled": {
+            "eer_percent": 0.0,
+            "eer_threshold": 7.646060890052468,
+            "genuine_trials": 30,
+            "forgery_trials": 75
+          },
+          "random": {
+            "eer_percent": 0.0,
+            "eer_threshold": 7.646060890052468,
+            "genuine_trials": 30,
+            "forgery_trials": 60
+          },
+          "model_sha256": "676116856c597ef14fd0d8259a4f64ab28c72f68b7421837006b13f97d954d2f",
+          "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+          "raw_sources_unchanged": true
+        }
+      ],
+      "statistics": [
+        {
+          "references": 1,
+          "attack": "skilled",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            13.33333333333333,
+            6.666666666666665,
+            10.666666666666668,
+            3.3333333333333326,
+            9.999999999999998
+          ],
+          "mean_percent": 8.8,
+          "sample_std_pp": 3.8701134063199976,
+          "population_std_pp": 3.4615346628659114,
+          "min_percent": 3.3333333333333326,
+          "max_percent": 13.33333333333333
+        },
+        {
+          "references": 1,
+          "attack": "random",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean_percent": 0.0,
+          "sample_std_pp": 0.0,
+          "population_std_pp": 0.0,
+          "min_percent": 0.0,
+          "max_percent": 0.0
+        },
+        {
+          "references": 4,
+          "attack": "skilled",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            0.0,
+            0.0,
+            2.666666666666667,
+            0.0,
+            0.0
+          ],
+          "mean_percent": 0.5333333333333334,
+          "sample_std_pp": 1.192569587999888,
+          "population_std_pp": 1.0666666666666669,
+          "min_percent": 0.0,
+          "max_percent": 2.666666666666667
+        },
+        {
+          "references": 4,
+          "attack": "random",
+          "seeds": [
+            111,
+            222,
+            333,
+            444,
+            555
+          ],
+          "eer_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean_percent": 0.0,
+          "sample_std_pp": 0.0,
+          "population_std_pp": 0.0,
+          "min_percent": 0.0,
+          "max_percent": 0.0
+        }
+      ],
+      "prior_seed111_scores_identical": true,
+      "original_files_verification": {
+        "files_checked": 601,
+        "all_original_files_unchanged": true,
+        "changed_files": []
+      },
+      "shared_training_configuration": {
+        "epochs": 20,
+        "steps_per_epoch": 12,
+        "tasks": 4,
+        "genuine": 5,
+        "forged": 10,
+        "lr": 0.01,
+        "momentum": 0.9,
+        "lr_decay": 0.9,
+        "gamma": 5,
+        "bandwidth": 0.1,
+        "device": "cuda",
+        "softdtw": "cpu",
+        "feature_names": [
+          "x",
+          "y",
+          "z",
+          "vx",
+          "vy",
+          "vz",
+          "ax",
+          "ay",
+          "az"
+        ],
+        "dataset_sha256": "a3bba4963de89d5cf2b64c56550447634447f19a7f2c81a21821de545859afd8",
+        "points": 128,
+        "torch": "2.7.1+cu128"
+      }
+    }
+  },
+  "verification": {
+    "tests_passed": 12,
+    "models_complete": 10,
+    "evaluation_conditions": 20,
+    "epoch_logs_checked": 200,
+    "all_scores_recomputed": true,
+    "all_model_hashes_verified": true
+  },
+  "date": "2026-10-26",
+  "baseline_commit": "05bd644",
+  "protocol": "Fixed signer-disjoint DsDTW-3D baseline. No official benchmark or equivalence claim."
+}
